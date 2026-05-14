@@ -844,6 +844,49 @@ section { padding: 6rem 3rem; }
 }
 .lineup-row-note .lineup-cell.highlight { color: var(--gray-800); }
 
+.answers {
+  margin: 1.25rem 0 1.5rem;
+  padding: 1rem 1.1rem 1.1rem;
+  background: var(--purple-tint);
+  border-radius: 14px;
+}
+.answers-label {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--purple);
+  margin-bottom: 0.7rem;
+}
+.answers-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.85rem;
+}
+.answer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.answer-num {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 0.9rem;
+  color: var(--purple-mid);
+  letter-spacing: 0.05em;
+}
+.answer-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--black);
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+}
+.answer-note {
+  font-size: 0.72rem;
+  color: var(--gray-600);
+  line-height: 1.45;
+}
+
 .moats {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -884,6 +927,12 @@ html.present-mode .lineup-row-domain .lineup-cell { font-size: 0.58rem; padding-
 html.present-mode .lineup-row-system .lineup-cell { padding-top: 0.1rem; padding-bottom: 0.35rem; }
 html.present-mode .lineup-system { font-size: 1.4rem; }
 html.present-mode .lineup-row-note .lineup-cell { font-size: 0.66rem; padding-top: 0.35rem; padding-bottom: 0.75rem; }
+html.present-mode .answers { margin: 0.7rem 0 0.85rem; padding: 0.65rem 0.85rem 0.75rem; }
+html.present-mode .answers-label { font-size: 0.58rem; margin-bottom: 0.4rem; }
+html.present-mode .answers-grid { gap: 0.55rem; }
+html.present-mode .answer-num { font-size: 0.72rem; }
+html.present-mode .answer-label { font-size: 0.7rem; }
+html.present-mode .answer-note { font-size: 0.62rem; line-height: 1.35; }
 html.present-mode .moats { padding-top: 0.85rem; }
 html.present-mode .moat { padding: 0 0.85rem; }
 html.present-mode .moat-num { font-size: 0.85rem; }
@@ -1536,6 +1585,7 @@ html.present-mode .hero-card-stat { font-size: 2.6rem; }
   .combo-grid { grid-template-columns: 1fr; }
   .lineup-row { grid-template-columns: 1fr; }
   .lineup-cell { border-right: none; border-bottom: 1px solid var(--gray-200); }
+  .answers-grid { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
   .moats { grid-template-columns: 1fr; gap: 0.75rem; }
   .moat { border-right: none; padding: 0; border-bottom: 1px solid var(--gray-200); padding-bottom: 0.75rem; }
   .moat:last-child { border-bottom: none; }
@@ -1813,6 +1863,37 @@ html.present-mode .hero-card-stat { font-size: 2.6rem; }
         <div class="lineup-cell">When HR &amp; finance disagree, this is the source of truth.</div>
         <div class="lineup-cell">Who wrote what, when, and why — the authoritative history.</div>
         <div class="lineup-cell highlight">When leadership asks <em>"why did we hire this person?"</em></div>
+      </div>
+    </div>
+
+    <div class="answers fade-up d3">
+      <div class="answers-label">What BrightHire's record actually contains</div>
+      <div class="answers-grid">
+        <div class="answer">
+          <span class="answer-num">01</span>
+          <span class="answer-label">What was asked</span>
+          <span class="answer-note">The interview plan, the rubric, the competencies being evaluated.</span>
+        </div>
+        <div class="answer">
+          <span class="answer-num">02</span>
+          <span class="answer-label">What was said</span>
+          <span class="answer-note">The actual conversation, captured and structured.</span>
+        </div>
+        <div class="answer">
+          <span class="answer-num">03</span>
+          <span class="answer-label">How it was evaluated</span>
+          <span class="answer-note">Evidence linked to competencies; scorecard grounded in that evidence.</span>
+        </div>
+        <div class="answer">
+          <span class="answer-num">04</span>
+          <span class="answer-label">What was decided</span>
+          <span class="answer-note">The hire/no-hire call and the rationale behind it.</span>
+        </div>
+        <div class="answer">
+          <span class="answer-num">05</span>
+          <span class="answer-label">What we learned</span>
+          <span class="answer-note">How the interview was conducted, fed back into the next one.</span>
+        </div>
       </div>
     </div>
 
