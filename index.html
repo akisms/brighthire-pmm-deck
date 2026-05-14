@@ -1,0 +1,1717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BrightHire — Charting a singular path in a crowded category</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --purple-deepest: #1A0F4E;
+  --purple-deep: #2D1B69;
+  --purple: #4F3DBE;
+  --purple-mid: #6B5BD9;
+  --purple-bright: #8B7AF0;
+  --purple-light: #B5A8F5;
+  --purple-pale: #E8E3FB;
+  --purple-tint: #F4F1FC;
+  --cta: #6E5DE7;
+  --cta-hover: #5847D4;
+  --cream: #FAF9FE;
+  --off-white: #F6F4FB;
+  --white: #FFFFFF;
+  --black: #1A1530;
+  --gray-900: #221C3D;
+  --gray-700: #3D3658;
+  --gray-600: #5F5876;
+  --gray-500: #7A7396;
+  --gray-400: #9C95B5;
+  --gray-300: #C5BFD5;
+  --gray-200: #E2DEEB;
+  --gray-100: #EFECF5;
+  --gray-50: #F8F6FB;
+  --accent: #FFD166;
+  --coral: #E86A5E;
+  --green: #2EBD8E;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 18px; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+  color: var(--black);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  line-height: 1.5;
+}
+
+/* ── Nav ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  height: 60px;
+  padding: 0 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255,255,255,0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+nav.scrolled {
+  border-bottom-color: rgba(26,21,48,0.06);
+  box-shadow: 0 2px 12px rgba(79,61,190,0.05);
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+.nav-logo img {
+  height: 120px;
+  width: auto;
+  display: block;
+}
+nav { height: 140px; padding: 0 2rem; }
+.hero { padding-top: 13rem; }
+html.present-mode section,
+html.present-mode .hero,
+html.present-mode .divider,
+html.present-mode .thankyou { padding-top: 9.5rem; }
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  align-items: center;
+}
+.nav-links a {
+  color: var(--gray-600);
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.nav-links a:hover,
+.nav-links a.active { color: var(--black); }
+
+.nav-actions { display: flex; gap: 0.55rem; align-items: center; }
+.nav-btn {
+  padding: 0.5rem 1.15rem;
+  background: var(--cta);
+  color: var(--white);
+  border: none;
+  border-radius: 100px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  font-family: inherit;
+}
+.nav-btn:hover { background: var(--cta-hover); }
+.nav-btn:active { transform: scale(0.97); }
+.nav-btn.secondary {
+  background: var(--white);
+  color: var(--purple);
+  border: 1px solid var(--purple-pale);
+}
+.nav-btn.secondary:hover { background: var(--purple-pale); }
+.nav-btn.secondary.active {
+  background: var(--purple);
+  color: var(--white);
+  border-color: var(--purple);
+}
+.nav-btn.ghost {
+  background: transparent;
+  color: var(--gray-600);
+  border: 1px solid var(--gray-200);
+}
+.nav-btn.ghost:hover { background: var(--gray-50); color: var(--black); border-color: var(--gray-300); }
+.nav-btn.ghost.danger { color: var(--coral); border-color: rgba(232,106,94,0.30); }
+.nav-btn.ghost.danger:hover { background: rgba(232,106,94,0.08); color: var(--coral); }
+.edit-only { display: none; }
+html.edit-mode .edit-only { display: inline-flex; }
+
+/* ── Edit Mode ── */
+html.edit-mode [data-edit] {
+  outline: 1px dashed rgba(79,61,190,0.35);
+  outline-offset: 3px;
+  border-radius: 3px;
+  cursor: text;
+  transition: outline-color 0.15s, background 0.15s;
+}
+html.edit-mode [data-edit]:hover {
+  outline-color: var(--purple);
+  background: rgba(232,227,251,0.25);
+}
+html.edit-mode [data-edit]:focus {
+  outline: 2px solid var(--purple);
+  background: rgba(255,255,255,0.6);
+}
+html.edit-mode .hero [data-edit]:focus,
+html.edit-mode .divider [data-edit]:focus,
+html.edit-mode .positioning [data-edit]:focus,
+html.edit-mode .thankyou [data-edit]:focus {
+  background: rgba(255,255,255,0.12);
+}
+.edit-toast {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  z-index: 200;
+  padding: 0.6rem 1.1rem;
+  background: var(--black);
+  color: var(--white);
+  border-radius: 100px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s, transform 0.25s;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+}
+.edit-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.edit-toast.error { background: var(--coral); }
+
+/* ── Hero / Slide 1 ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 7rem 3rem 4rem;
+  background:
+    radial-gradient(ellipse 80% 60% at 75% 25%, rgba(181,168,245,0.30) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 60% at 25% 80%, rgba(110,93,231,0.22) 0%, transparent 60%),
+    linear-gradient(135deg, #1A0F4E 0%, #2D1B69 45%, #4F3DBE 100%);
+  position: relative;
+  overflow: hidden;
+  color: var(--white);
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 18% 28%, rgba(255,255,255,0.10) 0%, transparent 7%),
+    radial-gradient(circle at 82% 72%, rgba(181,168,245,0.18) 0%, transparent 9%),
+    radial-gradient(circle at 60% 90%, rgba(255,209,102,0.08) 0%, transparent 8%);
+  pointer-events: none;
+}
+.hero-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--purple-light);
+  margin-bottom: 1.5rem;
+  padding: 0.35rem 0.9rem;
+  background: rgba(181,168,245,0.10);
+  border: 1px solid rgba(181,168,245,0.25);
+  border-radius: 100px;
+}
+.hero-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--purple-bright);
+  box-shadow: 0 0 10px var(--purple-bright);
+}
+.hero h1 {
+  font-size: clamp(2.5rem, 5vw, 4.3rem);
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--white);
+  margin-bottom: 1.3rem;
+  letter-spacing: -0.035em;
+}
+.hero h1 em {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--purple-light);
+  letter-spacing: -0.01em;
+}
+.hero-sub {
+  font-size: 1.08rem;
+  color: rgba(255,255,255,0.74);
+  line-height: 1.65;
+  margin-bottom: 2.25rem;
+  max-width: 520px;
+}
+.hero-author {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  max-width: 430px;
+}
+.hero-headshot {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  border: 3px solid rgba(181,168,245,0.45);
+}
+.hero-author-info { display: flex; flex-direction: column; gap: 0.15rem; }
+.hero-author-name { font-size: 1rem; font-weight: 600; color: var(--white); }
+.hero-author-role { font-size: 0.82rem; color: rgba(255,255,255,0.6); }
+.hero-visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hero-product {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  display: flex;
+  justify-content: center;
+}
+.hero-product img {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  border-radius: 18px;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.45), 0 4px 12px rgba(0,0,0,0.25);
+  border: 1px solid rgba(255,255,255,0.10);
+}
+.hero-product-glow {
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(ellipse 70% 70% at 50% 50%, rgba(181,168,245,0.35) 0%, transparent 60%);
+  filter: blur(20px);
+  z-index: 1;
+  pointer-events: none;
+}
+.hero-product-cap {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  text-align: center;
+}
+.hero-product-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 1rem;
+  background: rgba(181,168,245,0.14);
+  border: 1px solid rgba(181,168,245,0.30);
+  border-radius: 100px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--purple-light);
+  letter-spacing: 0.02em;
+}
+.hero-product-foot {
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.08em;
+}
+.hero-product-foot strong { color: #fff; font-weight: 700; }
+.hero-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 18px;
+  backdrop-filter: blur(20px);
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.25);
+}
+.hero-card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+  margin-bottom: 1rem;
+}
+.hero-card-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--purple-bright); }
+.hero-card-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--purple-light); }
+.hero-card-stat {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 3.6rem;
+  line-height: 1;
+  color: var(--white);
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.02em;
+}
+.hero-card-stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.72); line-height: 1.5; }
+.hero-card-foot {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255,255,255,0.10);
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.04em;
+}
+
+/* ── Shared section ── */
+section { padding: 6rem 3rem; }
+.container { max-width: 1200px; margin: 0 auto; }
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--purple);
+  margin-bottom: 1rem;
+}
+.section-label::before { content: ''; width: 22px; height: 1.5px; background: var(--purple); }
+.section-title {
+  font-size: clamp(1.9rem, 3.4vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: var(--black);
+  margin-bottom: 0.9rem;
+  max-width: 900px;
+}
+.section-title em {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--purple);
+}
+.section-subtitle {
+  font-size: 1.05rem;
+  color: var(--gray-600);
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+  max-width: 760px;
+}
+
+/* ── Slide 2: AI Disclosure ── */
+.disclosure { background: var(--cream); }
+.disclosure-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+.disclosure-card {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 14px;
+  padding: 1.75rem 1.85rem;
+}
+.disclosure-card.ai { background: linear-gradient(135deg, #F4F1FC 0%, #E8E3FB 100%); border-color: rgba(79,61,190,0.15); }
+.disclosure-card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 1rem;
+}
+.disclosure-card-icon {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  background: var(--purple);
+  color: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+.disclosure-card.ai .disclosure-card-icon {
+  background: linear-gradient(135deg, var(--purple) 0%, var(--purple-bright) 100%);
+}
+.disclosure-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--black); }
+.disclosure-card ul { list-style: none; }
+.disclosure-card li {
+  font-size: 0.9rem;
+  color: var(--gray-700);
+  padding: 0.5rem 0 0.5rem 1.4rem;
+  position: relative;
+  line-height: 1.55;
+  border-bottom: 1px solid var(--gray-100);
+}
+.disclosure-card li:last-child { border-bottom: none; }
+.disclosure-card li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 1.05rem;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--purple);
+}
+
+/* ── Section divider ── */
+.divider {
+  background: linear-gradient(135deg, var(--purple-deep) 0%, var(--purple) 100%);
+  color: var(--white);
+  padding: 5rem 3rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.divider::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 50%, rgba(255,255,255,0.10) 0%, transparent 30%),
+    radial-gradient(circle at 80% 50%, rgba(181,168,245,0.18) 0%, transparent 30%);
+  pointer-events: none;
+}
+.divider-inner { position: relative; z-index: 2; }
+.divider-num {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.3em;
+  color: var(--purple-light);
+  margin-bottom: 0.8rem;
+}
+.divider h2 {
+  font-size: clamp(2.5rem, 5.5vw, 4.2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--white);
+  line-height: 1.05;
+}
+.divider h2 em {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--purple-light);
+}
+
+/* ── Slide 3: Stakeholders ── */
+.stakeholders { background: var(--white); }
+.stake-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.1rem;
+  margin-top: 1.5rem;
+}
+.stake-card {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 16px;
+  padding: 1.6rem 1.7rem;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+.stake-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--purple-light);
+  box-shadow: 0 12px 30px rgba(79,61,190,0.10);
+}
+.stake-head {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--gray-100);
+}
+.stake-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  background: var(--purple-pale);
+  color: var(--purple);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+.stake-title { font-size: 1.05rem; font-weight: 700; color: var(--black); }
+.stake-row { margin-bottom: 0.7rem; }
+.stake-row:last-child { margin-bottom: 0; }
+.stake-row-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--purple);
+  margin-bottom: 0.25rem;
+}
+.stake-row-text {
+  font-size: 0.87rem;
+  color: var(--gray-700);
+  line-height: 1.5;
+}
+.stake-row.hard .stake-row-label { color: var(--coral); }
+
+/* ── Slide 4: Doom Loop ── */
+.doomloop { background: var(--cream); }
+.doom-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin: 1.5rem 0 2.25rem;
+}
+.doom-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 1.85rem 1.7rem;
+  border-top: 4px solid var(--purple);
+  box-shadow: 0 4px 18px rgba(26,21,48,0.04);
+}
+.doom-card:nth-child(2) { border-top-color: var(--purple-bright); }
+.doom-card:nth-child(3) { border-top-color: var(--coral); }
+.doom-stat {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--purple-deep);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.6rem;
+}
+.doom-card:nth-child(3) .doom-stat { color: var(--coral); }
+.doom-stat-unit {
+  font-size: 1.5rem;
+  color: var(--gray-500);
+  font-family: 'Inter', sans-serif;
+  margin-left: 0.2rem;
+}
+.doom-card h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 0.5rem;
+}
+.doom-card p {
+  font-size: 0.87rem;
+  color: var(--gray-600);
+  line-height: 1.55;
+}
+.doom-takeaway {
+  background: linear-gradient(135deg, var(--purple-deep) 0%, var(--purple) 100%);
+  color: var(--white);
+  border-radius: 16px;
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+.doom-takeaway-label {
+  flex-shrink: 0;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--purple-light);
+  padding-right: 1.25rem;
+  border-right: 1px solid rgba(255,255,255,0.18);
+}
+.doom-takeaway-text {
+  font-size: 1.02rem;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.92);
+}
+.doom-takeaway-text em {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-style: italic;
+  color: var(--purple-light);
+}
+
+/* ── Slide 5: Crowded Market ── */
+.crowded { background: var(--white); }
+.crowd-table {
+  margin-top: 1.5rem;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--gray-200);
+}
+.crowd-row {
+  display: grid;
+  grid-template-columns: 1.3fr 1.5fr 1.8fr;
+  border-bottom: 1px solid var(--gray-200);
+  background: var(--white);
+  transition: background 0.2s;
+}
+.crowd-row:last-child { border-bottom: none; }
+.crowd-row:hover { background: var(--gray-50); }
+.crowd-row.header {
+  background: var(--purple-tint);
+  font-weight: 700;
+}
+.crowd-row.header .crowd-cell {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--purple);
+  padding: 1rem 1.5rem;
+}
+.crowd-cell {
+  padding: 1.4rem 1.5rem;
+  border-right: 1px solid var(--gray-200);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--gray-700);
+}
+.crowd-cell:last-child { border-right: none; }
+.crowd-vs {
+  font-weight: 700;
+  color: var(--black);
+}
+.crowd-vs-sub {
+  font-size: 0.78rem;
+  color: var(--gray-500);
+  margin-top: 0.3rem;
+}
+.crowd-threat { color: var(--gray-700); }
+.crowd-counter {
+  color: var(--gray-800);
+  background: rgba(232,227,251,0.4);
+}
+.crowd-counter strong {
+  color: var(--purple-deep);
+  font-weight: 600;
+}
+
+/* ── Slide 6: Narrative ── */
+.narrative { background: var(--cream); }
+.narrative-split {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 1.75rem;
+  align-items: center;
+  margin: 1.5rem 0 2rem;
+}
+.narrative-visual {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  align-items: center;
+}
+.narrative-visual img {
+  width: 100%;
+  max-width: 380px;
+  border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(26,21,48,0.10), 0 2px 6px rgba(26,21,48,0.05);
+  border: 1px solid var(--gray-200);
+}
+.narrative-visual-cap {
+  font-size: 0.78rem;
+  color: var(--gray-500);
+  font-style: italic;
+  text-align: center;
+  max-width: 320px;
+  line-height: 1.45;
+}
+.narrative-lede {
+  background: var(--white);
+  border-left: 4px solid var(--purple);
+  border-radius: 4px 14px 14px 4px;
+  padding: 1.75rem 2rem;
+  font-size: 1.08rem;
+  line-height: 1.65;
+  color: var(--gray-800);
+  box-shadow: 0 4px 18px rgba(26,21,48,0.04);
+}
+.narrative-lede strong { color: var(--purple-deep); font-weight: 600; }
+.narrative-lede em {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-style: italic;
+  color: var(--purple);
+  font-size: 1.1em;
+}
+.proof-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.1rem;
+}
+.proof-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 1.65rem 1.6rem;
+  border: 1px solid var(--gray-200);
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.proof-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(79,61,190,0.10);
+}
+.proof-num {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 1.3rem;
+  color: var(--purple);
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.05em;
+}
+.proof-card h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 0.55rem;
+}
+.proof-card p {
+  font-size: 0.87rem;
+  color: var(--gray-600);
+  line-height: 1.55;
+}
+.proof-card p strong { color: var(--purple-deep); font-weight: 600; }
+
+/* ── Slide 7: Positioning ── */
+.positioning {
+  background: linear-gradient(135deg, var(--purple-deepest) 0%, var(--purple-deep) 60%, var(--purple) 100%);
+  color: var(--white);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.positioning::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 60% at 50% 30%, rgba(181,168,245,0.20) 0%, transparent 60%),
+    radial-gradient(circle at 20% 80%, rgba(110,93,231,0.25) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(255,209,102,0.06) 0%, transparent 40%);
+  pointer-events: none;
+}
+.positioning .container { position: relative; z-index: 2; }
+.positioning .section-label { color: var(--purple-light); }
+.positioning .section-label::before { background: var(--purple-light); }
+.position-mark {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 6rem;
+  color: var(--purple-light);
+  line-height: 0.5;
+  margin-bottom: 0.5rem;
+  opacity: 0.5;
+}
+.position-statement {
+  font-size: clamp(1.5rem, 3vw, 2.3rem);
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--white);
+  max-width: 950px;
+  margin: 0 auto 1.5rem;
+  letter-spacing: -0.02em;
+}
+.position-statement em {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--purple-light);
+}
+.position-statement strong {
+  font-weight: 700;
+  color: var(--white);
+  background: linear-gradient(180deg, transparent 60%, rgba(181,168,245,0.35) 60%);
+  padding: 0 0.15em;
+}
+.position-tags {
+  display: inline-flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1.25rem;
+}
+.position-tag {
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(181,168,245,0.30);
+  border-radius: 100px;
+  padding: 0.45rem 1.05rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--purple-light);
+  letter-spacing: 0.02em;
+}
+
+/* ── Slide 8: First 90 Days ── */
+.plan { background: var(--white); }
+.plan-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.1rem;
+  margin-top: 1.5rem;
+}
+.plan-item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 1.5rem;
+  background: var(--cream);
+  border-radius: 16px;
+  padding: 1.75rem 1.85rem;
+  border: 1px solid var(--gray-200);
+  align-items: start;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+.plan-item:hover {
+  transform: translateY(-2px);
+  border-color: var(--purple-light);
+  box-shadow: 0 12px 30px rgba(79,61,190,0.08);
+}
+.plan-num {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 3.5rem;
+  color: var(--purple);
+  line-height: 0.85;
+  letter-spacing: -0.02em;
+}
+.plan-content h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+.plan-content p {
+  font-size: 0.95rem;
+  color: var(--gray-700);
+  line-height: 1.6;
+}
+.plan-content p strong {
+  color: var(--purple-deep);
+  font-weight: 600;
+}
+.plan-pill {
+  display: inline-block;
+  margin-top: 0.65rem;
+  padding: 0.25rem 0.75rem;
+  background: var(--purple-pale);
+  color: var(--purple);
+  border-radius: 100px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* ── Thank You ── */
+.thankyou {
+  min-height: 80vh;
+  background: linear-gradient(135deg, var(--purple-deepest) 0%, var(--purple) 100%);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 5rem 3rem;
+  position: relative;
+  overflow: hidden;
+}
+.thankyou::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 50% 50% at 50% 50%, rgba(181,168,245,0.20) 0%, transparent 60%);
+}
+.thankyou-inner { position: relative; z-index: 2; max-width: 700px; }
+.thankyou h2 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin-bottom: 1.25rem;
+}
+.thankyou h2 em {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--purple-light);
+}
+.thankyou p {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.65;
+  margin-bottom: 2rem;
+}
+.thankyou-sig {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border: 1px solid rgba(181,168,245,0.30);
+  border-radius: 100px;
+  background: rgba(255,255,255,0.05);
+}
+.thankyou-sig img {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+}
+.thankyou-sig-name { font-weight: 600; color: var(--white); font-size: 0.95rem; }
+.thankyou-sig-role { font-size: 0.78rem; color: rgba(255,255,255,0.55); }
+
+/* ── Fade-up ── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fade-up.visible { opacity: 1; transform: none; }
+.fade-up.d1 { transition-delay: 0.08s; }
+.fade-up.d2 { transition-delay: 0.16s; }
+.fade-up.d3 { transition-delay: 0.24s; }
+.fade-up.d4 { transition-delay: 0.32s; }
+.fade-up.d5 { transition-delay: 0.40s; }
+
+/* ── Slide Indicator ── */
+.slide-indicator {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 90;
+  padding: 0.5rem 0.95rem;
+  background: rgba(26,21,48,0.85);
+  color: var(--white);
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  opacity: 0;
+  transition: opacity 0.3s;
+  backdrop-filter: blur(10px);
+}
+.slide-indicator.show { opacity: 1; }
+
+/* ── Present Mode ── */
+html.present-mode { scroll-behavior: auto; }
+html.present-mode body { overflow-x: hidden; overflow-y: hidden; }
+html.present-mode section,
+html.present-mode .hero,
+html.present-mode .divider,
+html.present-mode .thankyou {
+  min-height: 100vh;
+  height: 100vh;
+  padding-top: 5rem;
+  padding-bottom: 3rem;
+  display: flex;
+  align-items: center;
+  scroll-snap-align: start;
+}
+html.present-mode .hero { min-height: 100vh; }
+html.present-mode section > .container { width: 100%; }
+html.present-mode .fade-up { opacity: 1 !important; transform: none !important; }
+html.present-mode .nav-links a { opacity: 0.4; }
+html.present-mode .nav-links a.active { opacity: 1; color: var(--purple); }
+html.present-mode .present-btn { background: var(--purple-pale); color: var(--purple); }
+html.present-mode .slide-indicator { opacity: 1; }
+
+/* Present-mode compressions */
+html.present-mode section { padding: 5rem 3rem 2rem; }
+html.present-mode .section-title { font-size: clamp(1.6rem, 2.8vw, 2.2rem); margin-bottom: 0.6rem; }
+html.present-mode .section-subtitle { font-size: 0.95rem; margin-bottom: 1.5rem; }
+html.present-mode .section-label { margin-bottom: 0.7rem; }
+html.present-mode .stake-grid { gap: 0.85rem; margin-top: 0.85rem; }
+html.present-mode .stake-card { padding: 1.1rem 1.25rem; }
+html.present-mode .stake-head { margin-bottom: 0.7rem; padding-bottom: 0.6rem; }
+html.present-mode .stake-icon { width: 30px; height: 30px; font-size: 0.9rem; }
+html.present-mode .stake-title { font-size: 0.95rem; }
+html.present-mode .stake-row { margin-bottom: 0.5rem; }
+html.present-mode .stake-row-label { font-size: 0.62rem; margin-bottom: 0.15rem; }
+html.present-mode .stake-row-text { font-size: 0.78rem; line-height: 1.45; }
+html.present-mode .doom-grid { gap: 0.9rem; margin: 0.9rem 0 1.25rem; }
+html.present-mode .doom-card { padding: 1.25rem 1.3rem; }
+html.present-mode .doom-stat { font-size: 2.3rem; }
+html.present-mode .doom-card h3 { font-size: 0.95rem; margin-bottom: 0.35rem; }
+html.present-mode .doom-card p { font-size: 0.8rem; }
+html.present-mode .doom-takeaway { padding: 1rem 1.5rem; }
+html.present-mode .doom-takeaway-text { font-size: 0.92rem; }
+html.present-mode .crowd-cell { padding: 0.95rem 1.15rem; font-size: 0.8rem; }
+html.present-mode .crowd-row.header .crowd-cell { padding: 0.7rem 1.15rem; font-size: 0.65rem; }
+html.present-mode .crowd-vs-sub { font-size: 0.72rem; }
+html.present-mode .narrative-lede { padding: 1.1rem 1.4rem; font-size: 0.93rem; }
+html.present-mode .narrative-split { gap: 1.25rem; margin: 0.9rem 0 1.25rem; }
+html.present-mode .narrative-visual img { max-width: 280px; }
+html.present-mode .narrative-visual-cap { font-size: 0.7rem; }
+html.present-mode .proof-grid { gap: 0.8rem; }
+html.present-mode .proof-card { padding: 1.1rem 1.2rem; }
+html.present-mode .proof-card h3 { font-size: 0.95rem; }
+html.present-mode .proof-card p { font-size: 0.8rem; }
+html.present-mode .proof-num { font-size: 1.05rem; margin-bottom: 0.25rem; }
+html.present-mode .plan-list { gap: 0.8rem; margin-top: 0.85rem; }
+html.present-mode .plan-item { padding: 1.1rem 1.3rem; grid-template-columns: 60px 1fr; gap: 1.1rem; }
+html.present-mode .plan-num { font-size: 2.5rem; }
+html.present-mode .plan-content h3 { font-size: 1rem; }
+html.present-mode .plan-content p { font-size: 0.85rem; line-height: 1.5; }
+html.present-mode .plan-pill { font-size: 0.62rem; margin-top: 0.45rem; padding: 0.2rem 0.6rem; }
+html.present-mode .disclosure-grid { margin-top: 0.85rem; gap: 1rem; }
+html.present-mode .disclosure-card { padding: 1.15rem 1.35rem; }
+html.present-mode .disclosure-card li { font-size: 0.8rem; padding: 0.35rem 0 0.35rem 1.2rem; }
+html.present-mode .disclosure-card li::before { top: 0.85rem; }
+html.present-mode .hero-card-stat { font-size: 2.6rem; }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .stake-grid,
+  .doom-grid,
+  .proof-grid,
+  .disclosure-grid { grid-template-columns: 1fr; }
+  .crowd-row { grid-template-columns: 1fr; }
+  .narrative-split { grid-template-columns: 1fr; }
+  .crowd-cell { border-right: none; border-bottom: 1px solid var(--gray-200); }
+  section { padding: 4rem 1.5rem; }
+  .hero { padding: 6rem 1.5rem 3rem; }
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#cover" class="nav-logo">
+    <img src="brighthire%20logo.png" alt="BrightHire">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#customers">Customers</a></li>
+    <li><a href="#moment">Moment</a></li>
+    <li><a href="#challenge">Challenge</a></li>
+    <li><a href="#narrative">Narrative</a></li>
+    <li><a href="#positioning">Positioning</a></li>
+    <li><a href="#plan">90-Day Plan</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="nav-btn ghost edit-only" id="undoBtn" onclick="undoLast()" title="Undo last edit (⌘Z works inside text too)">Undo</button>
+    <button class="nav-btn ghost danger edit-only" id="resetBtn" onclick="resetAllEdits()" title="Revert every slide to the original text">Reset all</button>
+    <button class="nav-btn secondary" id="editBtn" onclick="toggleEdit()">Edit</button>
+    <button class="nav-btn" id="presentBtn" onclick="togglePresent()">Present</button>
+  </div>
+</nav>
+<div class="edit-toast" id="editToast">Saved</div>
+
+<!-- ── Slide 1: Cover ── -->
+<header class="hero" id="cover">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge fade-up">Senior PMM · Positioning Memo</div>
+      <h1 class="fade-up d1">Charting a <em>singular path</em> in a crowded category.</h1>
+      <p class="hero-sub fade-up d2">A point of view on where BrightHire wins as AI floods every layer of hiring — and how to claim the one position no competitor can credibly own.</p>
+      <div class="hero-author fade-up d3">
+        <img src="ayman%20kotob%20headshot.jpeg" alt="Ayman Kotob" class="hero-headshot">
+        <div class="hero-author-info">
+          <span class="hero-author-name">Ayman Kotob</span>
+          <span class="hero-author-role">Product Marketing · for BrightHire</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual fade-up d2">
+      <div class="hero-product">
+        <img src="brigthire%20image%20.webp" alt="BrightHire AI Interviewer">
+        <div class="hero-product-glow"></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ── Slide 2: AI Disclosure ── -->
+<section class="disclosure" id="disclosure">
+  <div class="container">
+    <div class="section-label fade-up">02 · AI Disclosure</div>
+    <h2 class="section-title fade-up">Built with <em>human judgment</em>, accelerated by AI.</h2>
+    <p class="section-subtitle fade-up d1">This presentation was created by Ayman Kotob with assistance from Claude and Claude Code. Here is how the work was divided.</p>
+    <div class="disclosure-grid">
+      <div class="disclosure-card fade-up d2">
+        <div class="disclosure-card-head">
+          <div class="disclosure-card-icon">AK</div>
+          <h3>Ayman</h3>
+        </div>
+        <ul>
+          <li>Performed initial exploratory research on the AI and HR tech landscape, including competitors</li>
+          <li>Reviewed BrightHire's website to understand the current offering and voice</li>
+          <li>Generated the narrative flow and strategic POV of this document</li>
+          <li>Reviewed and revised all AI outputs</li>
+        </ul>
+      </div>
+      <div class="disclosure-card ai fade-up d3">
+        <div class="disclosure-card-head">
+          <div class="disclosure-card-icon">AI</div>
+          <h3>Claude &amp; Claude Code</h3>
+        </div>
+        <ul>
+          <li>Reviewed drafts to identify opportunities for sharpening</li>
+          <li>Built out the slides based on the content Ayman developed</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Divider: Customers ── -->
+<section class="divider" id="customers-divider">
+  <div class="divider-inner">
+    <div class="divider-num fade-up">SECTION I</div>
+    <h2 class="fade-up d1">The <em>Customers</em></h2>
+  </div>
+</section>
+
+<!-- ── Slide 3: Stakeholders ── -->
+<section class="stakeholders" id="customers">
+  <div class="container">
+    <div class="section-label fade-up">03 · Stakeholders</div>
+    <h2 class="section-title fade-up">BrightHire speaks to <em>four stakeholders</em> in the interview interaction.</h2>
+    <p class="section-subtitle fade-up d1">Each comes to the interview with a different goal — and a different reason it's hard. Winning means serving all four without diluting the core promise to any one.</p>
+    <div class="stake-grid">
+      <div class="stake-card fade-up d2">
+        <div class="stake-head">
+          <div class="stake-icon">TA</div>
+          <div class="stake-title">Talent Acquisition</div>
+        </div>
+        <div class="stake-row">
+          <div class="stake-row-label">Who they are</div>
+          <div class="stake-row-text">Tip of the spear sourcing and screening talent.</div>
+        </div>
+        <div class="stake-row">
+          <div class="stake-row-label">What they want</div>
+          <div class="stake-row-text">Fill the top-of-funnel with the most qualified candidates.</div>
+        </div>
+        <div class="stake-row hard">
+          <div class="stake-row-label">Why it's hard</div>
+          <div class="stake-row-text">Applicant volume beyond bandwidth, AI making it harder to separate qualifications from buzzwords, and interviewing + note-taking + corralling feedback all at once — quality gives.</div>
+        </div>
+      </div>
+      <div class="stake-card fade-up d3">
+        <div class="stake-head">
+          <div class="stake-icon">HM</div>
+          <div class="stake-title">Hiring Managers</div>
+        </div>
+        <div class="stake-row">
+          <div class="stake-row-label">Who they are</div>
+          <div class="stake-row-text">Leaders for a specific function in their org.</div>
+        </div>
+        <div class="stake-row">
+          <div class="stake-row-label">What they want</div>
+          <div class="stake-row-text">Fill positions on their teams.</div>
+        </div>
+        <div class="stake-row hard">
+          <div class="stake-row-label">Why it's hard</div>
+          <div class="stake-row-text">Their day job comes first — no time to prep or give thorough feedback, plus fractious recruiter relationships when needs aren't clearly aligned.</div>
+        </div>
+      </div>
+      <div class="stake-card fade-up d4">
+        <div class="stake-head">
+          <div class="stake-icon">HR</div>
+          <div class="stake-title">People &amp; HR Leaders</div>
+        </div>
+        <div class="stake-row">
+          <div class="stake-row-label">Who they are</div>
+          <div class="stake-row-text">C-suite execs overseeing hiring and talent strategy.</div>
+        </div>
+        <div class="stake-row">
+          <div class="stake-row-label">What they want</div>
+          <div class="stake-row-text">Structured, clear, defensible practices that secure the best talent.</div>
+        </div>
+        <div class="stake-row hard">
+          <div class="stake-row-label">Why it's hard</div>
+          <div class="stake-row-text">Inconsistency across processes; teams lack the tools to capture interview moments and convert them into evidence.</div>
+        </div>
+      </div>
+      <div class="stake-card fade-up d5">
+        <div class="stake-head">
+          <div class="stake-icon">C</div>
+          <div class="stake-title">Candidates</div>
+        </div>
+        <div class="stake-row">
+          <div class="stake-row-label">Who they are</div>
+          <div class="stake-row-text">Job seekers.</div>
+        </div>
+        <div class="stake-row">
+          <div class="stake-row-label">What they want</div>
+          <div class="stake-row-text">A real shot at proving fit, clear feedback if they don't, a human experience — and no ghosting.</div>
+        </div>
+        <div class="stake-row hard">
+          <div class="stake-row-label">Why it's hard</div>
+          <div class="stake-row-text">High application volume makes landing interviews tough, ATS screens out qualified candidates, and overworked TA leads to inconsistent comms, ghosting, and no feedback.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Divider: The Moment ── -->
+<section class="divider" id="moment-divider">
+  <div class="divider-inner">
+    <div class="divider-num fade-up">SECTION II</div>
+    <h2 class="fade-up d1">The <em>Moment</em></h2>
+  </div>
+</section>
+
+<!-- ── Slide 4: Doom Loop ── -->
+<section class="doomloop" id="moment">
+  <div class="container">
+    <div class="section-label fade-up">04 · The Moment</div>
+    <h2 class="section-title fade-up">Hiring is in an <em>AI doom loop</em>.</h2>
+    <p class="section-subtitle fade-up d1">The talent acquisition landscape is at one of the most strained moments in its history — and it plays directly to BrightHire's strengths.</p>
+    <div class="doom-grid">
+      <div class="doom-card fade-up d2">
+        <div class="doom-stat">300<span class="doom-stat-unit">M</span></div>
+        <h3>Volume crisis</h3>
+        <p>Greenhouse processed 300 million applications in a single year. Recruiters are managing triple the volume per role — with no headcount growth.</p>
+      </div>
+      <div class="doom-card fade-up d3">
+        <div class="doom-stat">40-80<span class="doom-stat-unit">%</span></div>
+        <h3>AI on both sides</h3>
+        <p>40–80% of candidates use AI to apply. 13% used generative AI in real-time during their interview <em>(Gartner, Q3 2025)</em>.</p>
+      </div>
+      <div class="doom-card fade-up d4">
+        <div class="doom-stat">8<span class="doom-stat-unit">%</span></div>
+        <h3>Trust has collapsed</h3>
+        <p>Only 8% of job seekers think AI screening is fair. 26% trust AI to evaluate them. 53% were ghosted in 2026.</p>
+      </div>
+    </div>
+    <div class="doom-takeaway fade-up d5">
+      <div class="doom-takeaway-label">The Takeaway</div>
+      <div class="doom-takeaway-text">The answer to the doom loop isn't <em>less</em> AI — it's better AI applied to the right moment: <strong style="color:#fff;">the interview itself</strong>, where signal lives and trust can be rebuilt.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Divider: Challenge ── -->
+<section class="divider" id="challenge-divider">
+  <div class="divider-inner">
+    <div class="divider-num fade-up">SECTION III</div>
+    <h2 class="fade-up d1">The <em>Challenge</em></h2>
+  </div>
+</section>
+
+<!-- ── Slide 5: Crowded Market ── -->
+<section class="crowded" id="challenge">
+  <div class="container">
+    <div class="section-label fade-up">05 · Competitive Landscape</div>
+    <h2 class="section-title fade-up">A crowded market — and what BrightHire <em>has to defend against</em>.</h2>
+    <p class="section-subtitle fade-up d1">Four threats, four structural counters. Each one is a positioning fight BrightHire is uniquely built to win.</p>
+    <div class="crowd-table fade-up d2">
+      <div class="crowd-row header">
+        <div class="crowd-cell">The Competitor</div>
+        <div class="crowd-cell">The Threat</div>
+        <div class="crowd-cell">BrightHire's Counter</div>
+      </div>
+      <div class="crowd-row">
+        <div class="crowd-cell">
+          <div class="crowd-vs">Similar players</div>
+          <div class="crowd-vs-sub">e.g. Metaview</div>
+        </div>
+        <div class="crowd-cell crowd-threat">Pivoting from notetaker to multi-agent "sourcing to offer" platform.</div>
+        <div class="crowd-cell crowd-counter">They're <strong>sprinting wide</strong>. BrightHire goes <strong>deep on the one workflow</strong> that decides quality of hire — the interview itself.</div>
+      </div>
+      <div class="crowd-row">
+        <div class="crowd-cell">
+          <div class="crowd-vs">ATSs moving upstream</div>
+          <div class="crowd-vs-sub">Greenhouse, Ashby, Employ</div>
+        </div>
+        <div class="crowd-cell crowd-threat">Well-funded systems of record buying into interview tooling (Ezra, Talent Llama, Pillar).</div>
+        <div class="crowd-cell crowd-counter">Three structural defenses: <strong>depth</strong> ATSs won't invest in, <strong>ATS-agnostic</strong> across multi-ATS enterprises, and <strong>3M+ interviews</strong> of compounding training data.</div>
+      </div>
+      <div class="crowd-row">
+        <div class="crowd-cell">
+          <div class="crowd-vs">Generic notetakers</div>
+          <div class="crowd-vs-sub">Fireflies, Otter, Fathom, Zoom AI Companion</div>
+        </div>
+        <div class="crowd-cell crowd-threat">Capture is becoming a free commodity feature.</div>
+        <div class="crowd-cell crowd-counter">They <strong>record</strong> conversations. BrightHire <strong>structures</strong> them — and turns them into auditable decisions.</div>
+      </div>
+      <div class="crowd-row">
+        <div class="crowd-cell">
+          <div class="crowd-vs">The old way</div>
+          <div class="crowd-vs-sub">Spreadsheets &amp; gut feel</div>
+        </div>
+        <div class="crowd-cell crowd-threat">Manual screening, vibes-based hiring, decisions lost to memory.</div>
+        <div class="crowd-cell crowd-counter">AI screening at scale, <strong>fully engaged interviewers</strong>, decisions grounded in evidence — not recollection.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Divider: Narrative ── -->
+<section class="divider" id="narrative-divider">
+  <div class="divider-inner">
+    <div class="divider-num fade-up">SECTION IV</div>
+    <h2 class="fade-up d1">The <em>Narrative</em></h2>
+  </div>
+</section>
+
+<!-- ── Slide 6: Narrative ── -->
+<section class="narrative" id="narrative">
+  <div class="container">
+    <div class="section-label fade-up">06 · The Claim</div>
+    <h2 class="section-title fade-up">The <em>system of record</em> for hiring decisions.</h2>
+    <p class="section-subtitle fade-up d1">The way BrightHire wins in this crowded market is by claiming the one position no competitor can credibly own.</p>
+    <div class="narrative-lede fade-up d2" style="margin: 1.5rem 0 2rem;">
+      An ATS holds the <strong>candidate record</strong>. A notetaker holds the <strong>transcript</strong>. Only BrightHire holds the <em>structured, auditable link</em> between the conversation and the decision — which is the part that actually matters when leadership asks <strong>"why did we hire this person?"</strong>
+    </div>
+    <div class="proof-grid">
+      <div class="proof-card fade-up d3">
+        <div class="proof-num">01 · End-to-end</div>
+        <h3>The system of record's shape.</h3>
+        <p>Most competitors are point solutions — capture only, screening only, scheduling only. BrightHire spans the full workflow: <strong>Plan → Screen → Interview → Capture → Decide → Improve.</strong></p>
+      </div>
+      <div class="proof-card fade-up d4">
+        <div class="proof-num">02 · Every side</div>
+        <h3>Covers every side of the interview.</h3>
+        <p>TA gets screening and capture. Hiring managers get structure and clarity. People leaders get defensible processes. Candidates get a real shot and real feedback. <strong>No competitor serves all four.</strong></p>
+      </div>
+      <div class="proof-card fade-up d5">
+        <div class="proof-num">03 · Purpose-built</div>
+        <h3>Purpose-built, with proof.</h3>
+        <p>Six years of building AI for this specific function. <strong>3M+ real interviews of training data</strong> — a corpus no generic notetaker, no ATS feature team, and no recently-pivoted competitor can match.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Slide 7: Positioning ── -->
+<section class="positioning" id="positioning">
+  <div class="container">
+    <div class="section-label fade-up">07 · Positioning Statement</div>
+    <div class="position-mark fade-up">"</div>
+    <p class="position-statement fade-up d1">BrightHire is the <strong>system of record for hiring decisions</strong> — the <em>end-to-end</em> interview intelligence platform purpose-built to turn every conversation into <strong>structured, fair evidence</strong>. So recruiters move faster, candidates get the experience they deserve, and every hire is a decision <em>you can defend</em>.</p>
+    <div class="position-tags fade-up d3">
+      <span class="position-tag">End-to-end</span>
+      <span class="position-tag">Interview intelligence</span>
+      <span class="position-tag">Structured evidence</span>
+      <span class="position-tag">Auditable decisions</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── Divider: What I'd Do First ── -->
+<section class="divider" id="plan-divider">
+  <div class="divider-inner">
+    <div class="divider-num fade-up">SECTION V</div>
+    <h2 class="fade-up d1">What I'd <em>do first</em></h2>
+  </div>
+</section>
+
+<!-- ── Slide 8: First 90 Days ── -->
+<section class="plan" id="plan">
+  <div class="container">
+    <div class="section-label fade-up">08 · The First 90 Days</div>
+    <h2 class="section-title fade-up">Where I'd <em>start</em>.</h2>
+    <p class="section-subtitle fade-up d1">Three moves to make the positioning land — each tied directly to one of the structural moats.</p>
+    <div class="plan-list">
+      <div class="plan-item fade-up d2">
+        <div class="plan-num">01</div>
+        <div class="plan-content">
+          <h3>Rewrite the homepage hero around the system-of-record claim.</h3>
+          <p>The current <em>"AI built for exceptional hiring"</em> is generic enough that any competitor could use it. <strong>Lead with the category claim</strong>, surface the AI doom loop data above the fold, and visually separate customer logos from integration logos to stop diluting both signals.</p>
+          <span class="plan-pill">Brand · Web</span>
+        </div>
+      </div>
+      <div class="plan-item fade-up d3">
+        <div class="plan-num">02</div>
+        <div class="plan-content">
+          <h3>Build the proof the claim needs.</h3>
+          <p>A positioning claim is only as strong as the evidence underneath it. Specifically: <strong>multi-ATS enterprise case studies</strong> (the ATS-agnostic moat), <strong>interview-craft research</strong> published from the 3M-interview corpus (the data moat), and <strong>head-to-head depth comparisons</strong> vs. Metaview and Ashby (the depth moat).</p>
+          <span class="plan-pill">Content · Customer Marketing</span>
+        </div>
+      </div>
+      <div class="plan-item fade-up d4">
+        <div class="plan-num">03</div>
+        <div class="plan-content">
+          <h3>Get ahead of the Zoom narrative.</h3>
+          <p>The Zoom acquisition is distribution upside <em>and</em> positioning risk. Build a permanent <strong>"BrightHire + Zoom"</strong> page that names the independent-brand story explicitly, plus a <strong>/compare/zoom-ai-companion</strong> page — because Metaview already has one, and buyers will ask the question regardless of whether we answer it.</p>
+          <span class="plan-pill">Positioning · Comms</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Thank You ── -->
+<section class="thankyou" id="thankyou">
+  <div class="thankyou-inner">
+    <h2 class="fade-up">Thank you. Let's <em>chart the path</em>.</h2>
+    <p class="fade-up d1">A category-defining moment doesn't come around often. BrightHire has the corpus, the depth, and the workflow — and the doom loop creates the opening. The job now is to claim the position out loud, and build the proof underneath it.</p>
+    <div class="thankyou-sig fade-up d2">
+      <img src="ayman%20kotob%20headshot.jpeg" alt="Ayman Kotob">
+      <div style="text-align:left;">
+        <div class="thankyou-sig-name">Ayman Kotob</div>
+        <div class="thankyou-sig-role">aymankotob@gmail.com</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="slide-indicator" id="slideIndicator">1 / 12</div>
+
+<script>
+/* ── Edit Mode: assign stable IDs, hydrate from server, persist on blur ── */
+const EDIT_SELECTORS = [
+  'h1', 'h2', 'h3',
+  '.hero-sub', '.hero-author-name', '.hero-author-role',
+  '.hero-card-label', '.hero-card-stat', '.hero-card-stat-label', '.hero-card-foot',
+  '.section-label', '.section-subtitle',
+  '.divider-num',
+  '.disclosure-card li',
+  '.stake-title', '.stake-row-label', '.stake-row-text',
+  '.doom-stat', '.doom-card p', '.doom-takeaway-label', '.doom-takeaway-text',
+  '.crowd-vs', '.crowd-vs-sub', '.crowd-threat', '.crowd-counter',
+  '.narrative-lede', '.proof-num', '.proof-card p',
+  '.position-statement', '.position-tag',
+  '.plan-num', '.plan-content p', '.plan-pill',
+  '.thankyou p', '.thankyou-sig-name', '.thankyou-sig-role',
+];
+
+function assignEditIds() {
+  const seen = new Map();
+  document.querySelectorAll(EDIT_SELECTORS.join(',')).forEach(el => {
+    // Skip if inside an already-marked element (avoid nested editables)
+    if (el.closest('[data-edit]') && el.closest('[data-edit]') !== el) return;
+    const sel = EDIT_SELECTORS.find(s => el.matches(s)) || 'el';
+    const idx = (seen.get(sel) || 0) + 1;
+    seen.set(sel, idx);
+    const id = `${sel.replace(/[^a-z0-9]/gi, '_')}_${idx}`;
+    el.setAttribute('data-edit', id);
+  });
+}
+assignEditIds();
+
+/* Cache originals BEFORE hydration so Reset can restore them */
+const ORIGINALS = {};
+document.querySelectorAll('[data-edit]').forEach(el => {
+  ORIGINALS[el.getAttribute('data-edit')] = el.innerHTML;
+});
+
+const LS_KEY = 'brighthire-deck-edits';
+function readLocalEdits() {
+  try { return JSON.parse(localStorage.getItem(LS_KEY) || '{}'); }
+  catch { return {}; }
+}
+function writeLocalEdits(map) {
+  try { localStorage.setItem(LS_KEY, JSON.stringify(map)); } catch {}
+}
+
+async function hydrateEdits() {
+  // Local edits always apply (works even when opened directly in a browser)
+  const local = readLocalEdits();
+  // Try the server too — if running, merge in (server wins for any overlapping id)
+  let server = {};
+  try {
+    const res = await fetch('/edits.json?t=' + Date.now());
+    if (res.ok) {
+      const txt = await res.text();
+      // Make sure it's actually our JSON, not someone else's HTML 404 page
+      if (txt.trim().startsWith('{')) server = JSON.parse(txt);
+    }
+  } catch (e) {}
+  const merged = { ...local, ...server };
+  Object.entries(merged).forEach(([id, html]) => {
+    const el = document.querySelector(`[data-edit="${id}"]`);
+    if (el) el.innerHTML = html;
+  });
+}
+hydrateEdits();
+
+/* Undo stack: each entry = { id, prevHtml } */
+const UNDO_STACK = [];
+const UNDO_LIMIT = 50;
+
+const toast = document.getElementById('editToast');
+let toastTimer;
+function showToast(msg, isError) {
+  toast.textContent = msg;
+  toast.classList.toggle('error', !!isError);
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 1600);
+}
+
+let saveQueue = {};
+let saveTimer;
+let lastSavedHtml = {}; // id -> last persisted html, so we know what to push onto undo stack
+function queueSave(id, html, opts = {}) {
+  // First time this element changes after a save → snapshot the prior value for undo
+  if (!opts.skipUndo) {
+    const prev = (id in lastSavedHtml) ? lastSavedHtml[id] : ORIGINALS[id];
+    if (prev !== html) {
+      UNDO_STACK.push({ id, prevHtml: prev });
+      if (UNDO_STACK.length > UNDO_LIMIT) UNDO_STACK.shift();
+    }
+  }
+  saveQueue[id] = html;
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(flushSave, 400);
+}
+
+function undoLast() {
+  const entry = UNDO_STACK.pop();
+  if (!entry) { showToast('Nothing to undo'); return; }
+  const el = document.querySelector(`[data-edit="${entry.id}"]`);
+  if (!el) return;
+  el.innerHTML = entry.prevHtml;
+  // Persist the revert, but don't push it back onto the undo stack
+  queueSave(entry.id, entry.prevHtml, { skipUndo: true });
+  showToast('Undone');
+}
+
+async function resetAllEdits() {
+  if (!confirm('Revert every slide back to the original text? This cannot be undone.')) return;
+  try { localStorage.removeItem(LS_KEY); } catch {}
+  try { await fetch('/reset-edits', { method: 'POST' }); } catch (e) {}
+  Object.entries(ORIGINALS).forEach(([id, html]) => {
+    const el = document.querySelector(`[data-edit="${id}"]`);
+    if (el) el.innerHTML = html;
+  });
+  UNDO_STACK.length = 0;
+  lastSavedHtml = {};
+  showToast('All edits reset');
+}
+async function flushSave() {
+  if (!Object.keys(saveQueue).length) return;
+  const payload = saveQueue;
+  saveQueue = {};
+  // Always persist locally first — this is the reliable source of truth
+  const local = readLocalEdits();
+  const merged = { ...local, ...payload };
+  writeLocalEdits(merged);
+  Object.assign(lastSavedHtml, payload);
+  // Best-effort: also save to the server if it's running (lets edits sync across browsers)
+  let serverOk = false;
+  try {
+    const res = await fetch('/save-edits', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    if (res.ok) {
+      const txt = await res.text();
+      if (txt.trim().startsWith('{')) serverOk = true;
+    }
+  } catch (e) {}
+  showToast(serverOk ? 'Saved' : 'Saved locally');
+}
+
+function toggleEdit() {
+  const html = document.documentElement;
+  const btn = document.getElementById('editBtn');
+  const entering = !html.classList.contains('edit-mode');
+  html.classList.toggle('edit-mode', entering);
+  btn.classList.toggle('active', entering);
+  btn.textContent = entering ? 'Done' : 'Edit';
+  document.querySelectorAll('[data-edit]').forEach(el => {
+    if (entering) {
+      el.setAttribute('contenteditable', 'true');
+      el.setAttribute('spellcheck', 'true');
+    } else {
+      el.removeAttribute('contenteditable');
+    }
+  });
+  if (entering) showToast('Click any text to edit · changes save automatically');
+}
+
+document.addEventListener('input', e => {
+  const el = e.target.closest('[data-edit]');
+  if (!el || !document.documentElement.classList.contains('edit-mode')) return;
+  queueSave(el.getAttribute('data-edit'), el.innerHTML);
+});
+
+/* ── Original scroll / present-mode logic ── */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+const nav = document.getElementById('nav');
+const indicator = document.getElementById('slideIndicator');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+});
+
+function getSnapTargets() {
+  return Array.from(document.querySelectorAll('.hero, section, .thankyou'));
+}
+function getCurrentSlideIndex() {
+  const targets = getSnapTargets();
+  let best = 0;
+  let bestDist = Infinity;
+  for (let i = 0; i < targets.length; i++) {
+    const dist = Math.abs(targets[i].getBoundingClientRect().top);
+    if (dist < bestDist) { bestDist = dist; best = i; }
+  }
+  return best;
+}
+function updateIndicator() {
+  const targets = getSnapTargets();
+  const idx = getCurrentSlideIndex();
+  indicator.textContent = `${idx + 1} / ${targets.length}`;
+  const target = targets[idx];
+  const id = target.id || null;
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.classList.toggle('active', id ? a.getAttribute('href') === '#' + id : false);
+  });
+}
+function togglePresent(forceOff) {
+  const html = document.documentElement;
+  const btn = document.getElementById('presentBtn');
+  const entering = forceOff ? false : !html.classList.contains('present-mode');
+  const idx = entering ? getCurrentSlideIndex() : null;
+  html.classList.toggle('present-mode', entering);
+  btn.textContent = entering ? 'Exit' : 'Present';
+  indicator.classList.toggle('show', entering);
+  if (entering) {
+    const target = getSnapTargets()[idx];
+    requestAnimationFrame(() => {
+      target.scrollIntoView({ behavior: 'instant' });
+      updateIndicator();
+    });
+  }
+}
+function goToSlide(direction) {
+  const targets = getSnapTargets();
+  const idx = getCurrentSlideIndex() + direction;
+  const clamped = Math.max(0, Math.min(idx, targets.length - 1));
+  targets[clamped].scrollIntoView({ behavior: 'smooth' });
+  setTimeout(updateIndicator, 350);
+}
+document.addEventListener('keydown', e => {
+  const inPresent = document.documentElement.classList.contains('present-mode');
+  if ((e.key === 'p' || e.key === 'P') && !e.target.matches('input, textarea, [contenteditable="true"]')) {
+    e.preventDefault();
+    togglePresent();
+    return;
+  }
+  if (e.key === 'Escape' && inPresent) {
+    togglePresent(true);
+    return;
+  }
+  if (!inPresent) return;
+  if (e.target.matches('[contenteditable="true"]')) return;
+  const next = ['ArrowDown', 'ArrowRight', 'PageDown', ' '].includes(e.key);
+  const prev = ['ArrowUp', 'ArrowLeft', 'PageUp'].includes(e.key);
+  if (next || prev) {
+    e.preventDefault();
+    goToSlide(next ? 1 : -1);
+  }
+});
+let wheelLocked = false;
+document.addEventListener('wheel', e => {
+  if (!document.documentElement.classList.contains('present-mode')) return;
+  e.preventDefault();
+  if (wheelLocked) return;
+  wheelLocked = true;
+  goToSlide(e.deltaY > 0 ? 1 : -1);
+  setTimeout(() => { wheelLocked = false; }, 650);
+}, { passive: false });
+window.addEventListener('scroll', () => {
+  if (document.documentElement.classList.contains('present-mode')) return;
+  updateIndicator();
+});
+updateIndicator();
+</script>
+</body>
+</html>
