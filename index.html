@@ -515,11 +515,49 @@ section { padding: 6rem 3rem; }
   border-radius: 16px;
   padding: 1.6rem 1.7rem;
   transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+  position: relative;
 }
 .stake-card:hover {
   transform: translateY(-2px);
   border-color: var(--purple-light);
   box-shadow: 0 12px 30px rgba(79,61,190,0.10);
+}
+.stake-card.primary {
+  border: 1.5px solid var(--purple);
+  background: linear-gradient(180deg, #FFFFFF 0%, var(--purple-tint) 100%);
+  box-shadow: 0 4px 20px rgba(79,61,190,0.08);
+}
+.stake-card.primary:hover {
+  box-shadow: 0 14px 36px rgba(79,61,190,0.18);
+}
+.stake-card.served {
+  background: var(--gray-50);
+  opacity: 0.92;
+}
+.stake-card.served .stake-title { color: var(--gray-700); }
+.stake-card.served .stake-icon { background: var(--gray-100); color: var(--gray-600); }
+.stake-tag {
+  position: absolute;
+  top: -10px;
+  right: 14px;
+  padding: 0.25rem 0.7rem;
+  border-radius: 100px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.tag-primary {
+  background: var(--purple);
+  color: var(--white);
+  box-shadow: 0 2px 8px rgba(79,61,190,0.30);
+}
+.tag-served {
+  background: var(--white);
+  color: var(--gray-500);
+  border: 1px solid var(--gray-200);
 }
 .stake-head {
   display: flex;
@@ -598,6 +636,22 @@ section { padding: 6rem 3rem; }
   font-size: 0.87rem;
   color: var(--gray-600);
   line-height: 1.55;
+}
+.doom-source {
+  margin-top: 0.85rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--gray-100);
+  font-size: 0.7rem;
+  font-style: italic;
+  color: var(--gray-400);
+  line-height: 1.45;
+}
+.doom-takeaway-source {
+  margin-top: 0.65rem;
+  font-size: 0.7rem;
+  font-style: italic;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.45;
 }
 .doom-takeaway {
   background: linear-gradient(135deg, var(--purple-deep) 0%, var(--purple) 100%);
@@ -684,6 +738,59 @@ section { padding: 6rem 3rem; }
   color: var(--purple-deep);
   font-weight: 600;
 }
+.crowd-row.heavy {
+  background: var(--cream);
+  border-top: 1px solid var(--purple-pale);
+  border-bottom: 1px solid var(--purple-pale);
+}
+.crowd-row.heavy .crowd-cell { padding-top: 1.6rem; padding-bottom: 1.6rem; }
+.crowd-row.heavy:hover { background: var(--purple-tint); }
+.crowd-row.heavy .crowd-counter { background: rgba(232,227,251,0.55); }
+.crowd-flag {
+  display: inline-block;
+  margin-top: 0.7rem;
+  padding: 0.22rem 0.65rem;
+  background: var(--purple);
+  color: var(--white);
+  border-radius: 100px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.counter-intro {
+  font-size: 0.88rem;
+  color: var(--gray-700);
+  margin-bottom: 0.55rem;
+  line-height: 1.5;
+}
+.counter-intro em { font-style: italic; color: var(--purple-deep); }
+.counter-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.counter-list li {
+  font-size: 0.82rem;
+  color: var(--gray-700);
+  line-height: 1.5;
+  padding-left: 0.9rem;
+  position: relative;
+}
+.counter-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55rem;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--purple);
+}
+.counter-list li strong { color: var(--purple-deep); font-weight: 700; }
 
 /* ── Slide 6: Narrative ── */
 .narrative { background: var(--cream); }
@@ -836,6 +943,154 @@ section { padding: 6rem 3rem; }
   color: var(--purple-light);
   letter-spacing: 0.02em;
 }
+
+/* ── Zoom Slide ── */
+.zoom-slide { background: var(--white); }
+.zoom-context-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.1rem;
+  margin: 1.25rem 0 1.5rem;
+}
+.zoom-context-card {
+  border-radius: 14px;
+  padding: 1.25rem 1.4rem;
+  border: 1px solid var(--gray-200);
+}
+.zoom-context-card.opportunity {
+  background: linear-gradient(135deg, var(--purple-tint) 0%, #FFFFFF 100%);
+  border-color: rgba(79,61,190,0.18);
+}
+.zoom-context-card.risk {
+  background: linear-gradient(135deg, #FFF6F4 0%, #FFFFFF 100%);
+  border-color: rgba(232,106,94,0.20);
+}
+.zoom-context-label {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--purple);
+  margin-bottom: 0.5rem;
+}
+.zoom-context-card.risk .zoom-context-label { color: var(--coral); }
+.zoom-context-card p {
+  font-size: 0.92rem;
+  color: var(--gray-700);
+  line-height: 1.55;
+}
+.zoom-context-card p strong { color: var(--purple-deep); font-weight: 600; }
+.zoom-context-card.risk p strong { color: var(--coral); }
+.zoom-frame-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+  margin-bottom: 0.85rem;
+  text-align: center;
+}
+.zoom-compare {
+  display: grid;
+  grid-template-columns: 1fr 60px 1fr;
+  gap: 0.5rem;
+  align-items: stretch;
+  margin-bottom: 1.5rem;
+}
+.zoom-col {
+  border-radius: 14px;
+  padding: 1.25rem 1.4rem;
+  border: 1px solid var(--gray-200);
+}
+.zoom-col-companion {
+  background: var(--gray-50);
+}
+.zoom-col-brighthire {
+  background: linear-gradient(180deg, var(--purple-deep) 0%, var(--purple) 100%);
+  color: var(--white);
+  border-color: var(--purple-deep);
+}
+.zoom-col-head {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid var(--gray-200);
+  color: var(--gray-700);
+}
+.zoom-col-brighthire .zoom-col-head {
+  color: var(--white);
+  border-bottom-color: rgba(255,255,255,0.18);
+}
+.zoom-col-vs {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-style: italic;
+  font-size: 1.5rem;
+  color: var(--gray-400);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.zoom-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.zoom-list li {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--gray-700);
+  padding-left: 1rem;
+  position: relative;
+}
+.zoom-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55rem;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gray-400);
+}
+.zoom-col-brighthire .zoom-list li {
+  color: rgba(255,255,255,0.88);
+}
+.zoom-col-brighthire .zoom-list li::before {
+  background: var(--purple-light);
+  box-shadow: 0 0 6px var(--purple-light);
+}
+.zoom-list li strong { color: var(--black); font-weight: 700; }
+.zoom-col-brighthire .zoom-list li strong { color: var(--white); }
+.zoom-list li em { font-style: italic; color: var(--purple); }
+.zoom-col-brighthire .zoom-list li em { color: var(--purple-light); }
+.zoom-bottom {
+  background: var(--cream);
+  border-left: 4px solid var(--purple);
+  border-radius: 4px 14px 14px 4px;
+  padding: 1.1rem 1.4rem;
+  font-size: 0.97rem;
+  line-height: 1.55;
+  color: var(--gray-800);
+}
+.zoom-bottom strong { color: var(--purple-deep); font-weight: 700; }
+.zoom-bottom em { font-style: italic; color: var(--purple); }
+
+/* Present-mode compressions for Zoom slide */
+html.present-mode .zoom-context-row { margin: 0.75rem 0 0.9rem; gap: 0.7rem; }
+html.present-mode .zoom-context-card { padding: 0.85rem 1rem; }
+html.present-mode .zoom-context-card p { font-size: 0.78rem; }
+html.present-mode .zoom-context-label { margin-bottom: 0.3rem; font-size: 0.6rem; }
+html.present-mode .zoom-frame-label { font-size: 0.7rem; margin-bottom: 0.55rem; }
+html.present-mode .zoom-compare { margin-bottom: 0.85rem; gap: 0.4rem; }
+html.present-mode .zoom-col { padding: 0.85rem 1rem; }
+html.present-mode .zoom-col-head { font-size: 0.85rem; margin-bottom: 0.45rem; padding-bottom: 0.35rem; }
+html.present-mode .zoom-list li { font-size: 0.74rem; }
+html.present-mode .zoom-col-vs { font-size: 1.2rem; }
+html.present-mode .zoom-bottom { padding: 0.7rem 1rem; font-size: 0.82rem; }
 
 /* ── Slide 8: First 90 Days ── */
 .plan { background: var(--white); }
@@ -1082,6 +1337,7 @@ html.present-mode .hero-card-stat { font-size: 2.6rem; }
     <li><a href="#challenge">Challenge</a></li>
     <li><a href="#narrative">Narrative</a></li>
     <li><a href="#positioning">Positioning</a></li>
+    <li><a href="#zoom">Zoom</a></li>
     <li><a href="#plan">90-Day Plan</a></li>
   </ul>
   <div class="nav-actions">
@@ -1099,7 +1355,7 @@ html.present-mode .hero-card-stat { font-size: 2.6rem; }
     <div>
       <div class="hero-badge fade-up">Senior PMM · Positioning Memo</div>
       <h1 class="fade-up d1">Charting a <em>singular path</em> in a crowded category.</h1>
-      <p class="hero-sub fade-up d2">A point of view on where BrightHire wins as AI floods every layer of hiring — and how to claim the one position no competitor can credibly own.</p>
+      <p class="hero-sub fade-up d2">A perspective on where BrightHire can win as AI reshapes every layer of hiring — and the position I think is worth claiming.</p>
       <div class="hero-author fade-up d3">
         <img src="ayman%20kotob%20headshot.jpeg" alt="Ayman Kotob" class="hero-headshot">
         <div class="hero-author-info">
@@ -1163,9 +1419,10 @@ html.present-mode .hero-card-stat { font-size: 2.6rem; }
   <div class="container">
     <div class="section-label fade-up">03 · Stakeholders</div>
     <h2 class="section-title fade-up">BrightHire speaks to <em>four stakeholders</em> in the interview interaction.</h2>
-    <p class="section-subtitle fade-up d1">Each comes to the interview with a different goal — and a different reason it's hard. Winning means serving all four without diluting the core promise to any one.</p>
+    <p class="section-subtitle fade-up d1">Each comes to the interview with a different goal — and a different reason it's hard. BrightHire's messaging primarily speaks to <strong>TA (the user)</strong> and <strong>People &amp; HR Leaders (the buyer)</strong>, while serving hiring managers and candidates through the experience the platform creates.</p>
     <div class="stake-grid">
-      <div class="stake-card fade-up d2">
+      <div class="stake-card primary fade-up d2">
+        <span class="stake-tag tag-primary">Primary · User</span>
         <div class="stake-head">
           <div class="stake-icon">TA</div>
           <div class="stake-title">Talent Acquisition</div>
@@ -1183,7 +1440,8 @@ html.present-mode .hero-card-stat { font-size: 2.6rem; }
           <div class="stake-row-text">Applicant volume beyond bandwidth, AI making it harder to separate qualifications from buzzwords, and interviewing + note-taking + corralling feedback all at once — quality gives.</div>
         </div>
       </div>
-      <div class="stake-card fade-up d3">
+      <div class="stake-card served fade-up d3">
+        <span class="stake-tag tag-served">Served through the platform</span>
         <div class="stake-head">
           <div class="stake-icon">HM</div>
           <div class="stake-title">Hiring Managers</div>
@@ -1201,7 +1459,8 @@ html.present-mode .hero-card-stat { font-size: 2.6rem; }
           <div class="stake-row-text">Their day job comes first — no time to prep or give thorough feedback, plus fractious recruiter relationships when needs aren't clearly aligned.</div>
         </div>
       </div>
-      <div class="stake-card fade-up d4">
+      <div class="stake-card primary fade-up d4">
+        <span class="stake-tag tag-primary">Primary · Buyer</span>
         <div class="stake-head">
           <div class="stake-icon">HR</div>
           <div class="stake-title">People &amp; HR Leaders</div>
@@ -1219,7 +1478,8 @@ html.present-mode .hero-card-stat { font-size: 2.6rem; }
           <div class="stake-row-text">Inconsistency across processes; teams lack the tools to capture interview moments and convert them into evidence.</div>
         </div>
       </div>
-      <div class="stake-card fade-up d5">
+      <div class="stake-card served fade-up d5">
+        <span class="stake-tag tag-served">Served through the platform</span>
         <div class="stake-head">
           <div class="stake-icon">C</div>
           <div class="stake-title">Candidates</div>
@@ -1260,21 +1520,27 @@ html.present-mode .hero-card-stat { font-size: 2.6rem; }
         <div class="doom-stat">300<span class="doom-stat-unit">M</span></div>
         <h3>Volume crisis</h3>
         <p>Greenhouse processed 300 million applications in a single year. Recruiters are managing triple the volume per role — with no headcount growth.</p>
+        <div class="doom-source">Greenhouse, via From Day One (Aug 2025). Triple-volume figure per HR Dive (April 2026).</div>
       </div>
       <div class="doom-card fade-up d3">
         <div class="doom-stat">40-80<span class="doom-stat-unit">%</span></div>
         <h3>AI on both sides</h3>
-        <p>40–80% of candidates use AI to apply. 13% used generative AI in real-time during their interview <em>(Gartner, Q3 2025)</em>.</p>
+        <p>40–80% of candidates use AI to apply. 13% used generative AI in real-time during their interview.</p>
+        <div class="doom-source">DemandSage / Gartner 2025; Gartner Q3 2025.</div>
       </div>
       <div class="doom-card fade-up d4">
         <div class="doom-stat">8<span class="doom-stat-unit">%</span></div>
         <h3>Trust has collapsed</h3>
         <p>Only 8% of job seekers think AI screening is fair. 26% trust AI to evaluate them. 53% were ghosted in 2026.</p>
+        <div class="doom-source">Greenhouse 2025 AI in Hiring Report; trust figure: Gartner July 2025; ghosting: Criteria Corp 2026 Candidate Experience Report.</div>
       </div>
     </div>
     <div class="doom-takeaway fade-up d5">
       <div class="doom-takeaway-label">The Takeaway</div>
-      <div class="doom-takeaway-text">The answer to the doom loop isn't <em>less</em> AI — it's better AI applied to the right moment: <strong style="color:#fff;">the interview itself</strong>, where signal lives and trust can be rebuilt.</div>
+      <div>
+        <div class="doom-takeaway-text">The answer to the doom loop isn't <em>less</em> AI — it's better AI applied to the right moment: <strong style="color:#fff;">the interview itself</strong>, where signal lives and trust can be rebuilt.</div>
+        <div class="doom-takeaway-source">The phrase "AI doom loop" was coined by Greenhouse CEO Daniel Chait, Fortune, Nov 2025.</div>
+      </div>
     </div>
   </div>
 </section>
@@ -1307,13 +1573,21 @@ html.present-mode .hero-card-stat { font-size: 2.6rem; }
         <div class="crowd-cell crowd-threat">Pivoting from notetaker to multi-agent "sourcing to offer" platform.</div>
         <div class="crowd-cell crowd-counter">They're <strong>sprinting wide</strong>. BrightHire goes <strong>deep on the one workflow</strong> that decides quality of hire — the interview itself.</div>
       </div>
-      <div class="crowd-row">
+      <div class="crowd-row heavy">
         <div class="crowd-cell">
           <div class="crowd-vs">ATSs moving upstream</div>
           <div class="crowd-vs-sub">Greenhouse, Ashby, Employ</div>
+          <span class="crowd-flag">Most existential</span>
         </div>
-        <div class="crowd-cell crowd-threat">Well-funded systems of record buying into interview tooling (Ezra, Talent Llama, Pillar).</div>
-        <div class="crowd-cell crowd-counter">Three structural defenses: <strong>depth</strong> ATSs won't invest in, <strong>ATS-agnostic</strong> across multi-ATS enterprises, and <strong>3M+ interviews</strong> of compounding training data.</div>
+        <div class="crowd-cell crowd-threat">Well-funded systems of record buying their way into interview tooling — <strong>Greenhouse acquired Ezra</strong>, <strong>Ashby acquired Talent Llama</strong>, <strong>Employ acquired Pillar</strong> (now bundled as "AI Interview Companion" across Lever, Jobvite, JazzHR).</div>
+        <div class="crowd-cell crowd-counter">
+          <div class="counter-intro">Three structural defenses that <em>don't go away</em> when ATSs catch up:</div>
+          <ul class="counter-list">
+            <li><strong>Depth</strong> — ATSs treat interview tooling as a feature; their R&amp;D priorities are pipeline and workflow, not interview craft.</li>
+            <li><strong>ATS-agnostic</strong> — enterprises running multiple ATSs across regions or business units need a layer that works across all of them.</li>
+            <li><strong>Compounding data</strong> — 3M+ interviews of training data, growing daily, getting better at interviews specifically.</li>
+          </ul>
+        </div>
       </div>
       <div class="crowd-row">
         <div class="crowd-cell">
@@ -1387,6 +1661,50 @@ html.present-mode .hero-card-stat { font-size: 2.6rem; }
   </div>
 </section>
 
+<!-- ── Slide 8: The Zoom Question ── -->
+<section class="zoom-slide" id="zoom">
+  <div class="container">
+    <div class="section-label fade-up">08 · The Zoom Question</div>
+    <h2 class="section-title fade-up">On Zoom — <em>distribution upside, positioning hazard</em>.</h2>
+    <p class="section-subtitle fade-up d1">The Zoom acquisition (December 2025) is the single most important strategic context for BrightHire right now. It needs deliberate messaging.</p>
+    <div class="zoom-context-row">
+      <div class="zoom-context-card opportunity fade-up d2">
+        <div class="zoom-context-label">The Opportunity</div>
+        <p>Zoom hosts <strong>millions of interviews a year</strong>. The acquisition unlocks roughly <strong>10–50x BrightHire's standalone TAM</strong> through Zoom's enterprise base.</p>
+      </div>
+      <div class="zoom-context-card risk fade-up d3">
+        <div class="zoom-context-label">The Risk</div>
+        <p>Zoom AI Companion is <strong>free with paid Zoom plans</strong>. The buyer's reflex question becomes: <em>"Why pay extra for BrightHire when AI Companion is already bundled?"</em></p>
+      </div>
+    </div>
+    <div class="zoom-frame-label fade-up d3">The framing that resolves the tension:</div>
+    <div class="zoom-compare fade-up d4">
+      <div class="zoom-col zoom-col-companion">
+        <div class="zoom-col-head">Zoom AI Companion</div>
+        <ul class="zoom-list">
+          <li><strong>Horizontal</strong> — for all meetings</li>
+          <li>Records and summarizes</li>
+          <li>For companies that want <em>better notes</em></li>
+          <li>Free with Zoom</li>
+        </ul>
+      </div>
+      <div class="zoom-col-vs">vs.</div>
+      <div class="zoom-col zoom-col-brighthire">
+        <div class="zoom-col-head">BrightHire</div>
+        <ul class="zoom-list">
+          <li><strong>Vertical</strong> — purpose-built for hiring</li>
+          <li>Structures, scores, and decides</li>
+          <li>For companies that want <em>better hires</em></li>
+          <li>A standalone platform that happens to run on Zoom (and Meet, and Teams)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="zoom-bottom fade-up d5">
+      <strong>Bottom line:</strong> AI Companion is horizontal notetaking applied to a vertical workflow. BrightHire <em>is</em> the vertical workflow. <strong>Different products. Different categories.</strong>
+    </div>
+  </div>
+</section>
+
 <!-- ── Divider: What I'd Do First ── -->
 <section class="divider" id="plan-divider">
   <div class="divider-inner">
@@ -1398,14 +1716,14 @@ html.present-mode .hero-card-stat { font-size: 2.6rem; }
 <!-- ── Slide 8: First 90 Days ── -->
 <section class="plan" id="plan">
   <div class="container">
-    <div class="section-label fade-up">08 · The First 90 Days</div>
+    <div class="section-label fade-up">09 · The First 90 Days</div>
     <h2 class="section-title fade-up">Where I'd <em>start</em>.</h2>
-    <p class="section-subtitle fade-up d1">Three moves to make the positioning land — each tied directly to one of the structural moats.</p>
+    <p class="section-subtitle fade-up d1">Three threads I'd pull on early — pending context from the team, customers, and product.</p>
     <div class="plan-list">
       <div class="plan-item fade-up d2">
         <div class="plan-num">01</div>
         <div class="plan-content">
-          <h3>Rewrite the homepage hero around the system-of-record claim.</h3>
+          <h3>I'd want to rewrite the homepage hero around the system-of-record claim.</h3>
           <p>The current <em>"AI built for exceptional hiring"</em> is generic enough that any competitor could use it. <strong>Lead with the category claim</strong>, surface the AI doom loop data above the fold, and visually separate customer logos from integration logos to stop diluting both signals.</p>
           <span class="plan-pill">Brand · Web</span>
         </div>
@@ -1413,7 +1731,7 @@ html.present-mode .hero-card-stat { font-size: 2.6rem; }
       <div class="plan-item fade-up d3">
         <div class="plan-num">02</div>
         <div class="plan-content">
-          <h3>Build the proof the claim needs.</h3>
+          <h3>I'd invest in building the proof the claim needs.</h3>
           <p>A positioning claim is only as strong as the evidence underneath it. Specifically: <strong>multi-ATS enterprise case studies</strong> (the ATS-agnostic moat), <strong>interview-craft research</strong> published from the 3M-interview corpus (the data moat), and <strong>head-to-head depth comparisons</strong> vs. Metaview and Ashby (the depth moat).</p>
           <span class="plan-pill">Content · Customer Marketing</span>
         </div>
@@ -1421,7 +1739,7 @@ html.present-mode .hero-card-stat { font-size: 2.6rem; }
       <div class="plan-item fade-up d4">
         <div class="plan-num">03</div>
         <div class="plan-content">
-          <h3>Get ahead of the Zoom narrative.</h3>
+          <h3>I'd get ahead of the Zoom narrative.</h3>
           <p>The Zoom acquisition is distribution upside <em>and</em> positioning risk. Build a permanent <strong>"BrightHire + Zoom"</strong> page that names the independent-brand story explicitly, plus a <strong>/compare/zoom-ai-companion</strong> page — because Metaview already has one, and buyers will ask the question regardless of whether we answer it.</p>
           <span class="plan-pill">Positioning · Comms</span>
         </div>
@@ -1433,8 +1751,8 @@ html.present-mode .hero-card-stat { font-size: 2.6rem; }
 <!-- ── Thank You ── -->
 <section class="thankyou" id="thankyou">
   <div class="thankyou-inner">
-    <h2 class="fade-up">Thank you. Let's <em>chart the path</em>.</h2>
-    <p class="fade-up d1">A category-defining moment doesn't come around often. BrightHire has the corpus, the depth, and the workflow — and the doom loop creates the opening. The job now is to claim the position out loud, and build the proof underneath it.</p>
+    <h2 class="fade-up">Thank you. <em>Looking forward</em> to chatting.</h2>
+    <p class="fade-up d1">Genuinely excited about the moment BrightHire is in — and curious to learn what it looks like from the inside.</p>
     <div class="thankyou-sig fade-up d2">
       <img src="ayman%20kotob%20headshot.jpeg" alt="Ayman Kotob">
       <div style="text-align:left;">
@@ -1485,7 +1803,7 @@ document.querySelectorAll('[data-edit]').forEach(el => {
   ORIGINALS[el.getAttribute('data-edit')] = el.innerHTML;
 });
 
-const LS_KEY = 'brighthire-deck-edits';
+const LS_KEY = 'brighthire-deck-edits-v2';
 function readLocalEdits() {
   try { return JSON.parse(localStorage.getItem(LS_KEY) || '{}'); }
   catch { return {}; }
