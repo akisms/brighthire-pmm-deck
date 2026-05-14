@@ -1152,6 +1152,35 @@ html.present-mode .zoom-bottom { padding: 0.7rem 1rem; font-size: 0.82rem; }
   text-transform: uppercase;
 }
 
+/* ── Open Questions (variant of Plan) ── */
+.plan.questions { background: var(--cream); }
+.plan.questions .plan-item {
+  background: var(--white);
+  border-style: dashed;
+  border-color: var(--purple-pale);
+}
+.plan.questions .plan-item:hover {
+  border-style: solid;
+  border-color: var(--purple-light);
+}
+.plan.questions .plan-num {
+  position: relative;
+  color: var(--purple-mid);
+}
+.question-mark {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-style: italic;
+  font-size: 0.55em;
+  color: var(--purple);
+  margin-left: 0.05em;
+  vertical-align: 0.5em;
+}
+.plan.questions .plan-pill {
+  background: var(--white);
+  border: 1px solid var(--purple-pale);
+  color: var(--purple);
+}
+
 /* ── Thank You ── */
 .thankyou {
   min-height: 80vh;
@@ -1339,6 +1368,7 @@ html.present-mode .hero-card-stat { font-size: 2.6rem; }
     <li><a href="#positioning">Positioning</a></li>
     <li><a href="#zoom">Zoom</a></li>
     <li><a href="#plan">90-Day Plan</a></li>
+    <li><a href="#questions">Open Questions</a></li>
   </ul>
   <div class="nav-actions">
     <button class="nav-btn ghost edit-only" id="undoBtn" onclick="undoLast()" title="Undo last edit (⌘Z works inside text too)">Undo</button>
@@ -1748,6 +1778,41 @@ html.present-mode .hero-card-stat { font-size: 2.6rem; }
   </div>
 </section>
 
+<!-- ── Slide 10: Open Questions ── -->
+<section class="plan questions" id="questions">
+  <div class="container">
+    <div class="section-label fade-up">10 · Open Questions</div>
+    <h2 class="section-title fade-up">Threads worth <em>pulling on next</em>.</h2>
+    <p class="section-subtitle fade-up d1">Three strategic questions I'd want to explore early — with product, brand, and customer input — before committing to a direction.</p>
+    <div class="plan-list">
+      <div class="plan-item question-item fade-up d2">
+        <div class="plan-num">01<span class="question-mark">?</span></div>
+        <div class="plan-content">
+          <h3>Should we reframe our capabilities as a fleet of specialized hiring agents?</h3>
+          <p>Metaview has publicly claimed the <em>"fleet of agents"</em> vocabulary — sourcing agent, application review agent, ICP engine. Our existing modules — <strong>Plan, Screen, Interview, Capture, Decide, Improve</strong> — could credibly be reframed as specialized hiring agents, each purpose-built for a specific decision moment. This isn't about expanding scope; it's about modernizing how we describe the depth we already have. The question is whether the framing reinforces our system-of-record story or muddies our "depth not breadth" contrast with Metaview.</p>
+          <span class="plan-pill">Product · Brand</span>
+        </div>
+      </div>
+      <div class="plan-item question-item fade-up d3">
+        <div class="plan-num">02<span class="question-mark">?</span></div>
+        <div class="plan-content">
+          <h3>How do we talk about Zoom without becoming a Zoom feature in the buyer's head?</h3>
+          <p>The acquisition is distribution upside <em>and</em> positioning hazard. The hero shouldn't mention Zoom — but customers will. We need a deliberate framework for when to <strong>lean into Zoom</strong> (procurement trust, enterprise scale) and when to <strong>lean out</strong> (standalone brand, ATS-agnostic). The <strong>/compare/zoom-ai-companion</strong> page is one piece. The broader playbook — sales talk tracks, demo flow, RFP language — needs work.</p>
+          <span class="plan-pill">Positioning · Sales Enablement</span>
+        </div>
+      </div>
+      <div class="plan-item question-item fade-up d4">
+        <div class="plan-num">03<span class="question-mark">?</span></div>
+        <div class="plan-content">
+          <h3>What's the thought leadership program that turns our 3M-interview corpus into a category-defining asset?</h3>
+          <p>We have a data moat most competitors can only dream of, but it's not currently doing work in the market. A flagship annual research report — something like <em>"The State of the Interview"</em> — could anchor BrightHire as the authoritative voice on hiring conversations the way Salesforce owns <em>"State of Sales."</em> Worth exploring scope, cadence, and editorial partnerships.</p>
+          <span class="plan-pill">Content · Brand</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ── Thank You ── -->
 <section class="thankyou" id="thankyou">
   <div class="thankyou-inner">
@@ -1803,7 +1868,7 @@ document.querySelectorAll('[data-edit]').forEach(el => {
   ORIGINALS[el.getAttribute('data-edit')] = el.innerHTML;
 });
 
-const LS_KEY = 'brighthire-deck-edits-v2';
+const LS_KEY = 'brighthire-deck-edits-v3';
 function readLocalEdits() {
   try { return JSON.parse(localStorage.getItem(LS_KEY) || '{}'); }
   catch { return {}; }
