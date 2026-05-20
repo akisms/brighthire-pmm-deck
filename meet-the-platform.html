@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meet the BrightHire Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --purple-deepest: #1A0F4E;
+  --purple-deep: #2D1B69;
+  --purple: #4F3DBE;
+  --purple-mid: #6B5BD9;
+  --purple-bright: #8B7AF0;
+  --purple-light: #B5A8F5;
+  --purple-pale: #E8E3FB;
+  --purple-tint: #F4F1FC;
+  --cream: #FAF9FE;
+  --white: #FFFFFF;
+  --black: #1A1530;
+  --gray-900: #221C3D;
+  --gray-800: #3D3658;
+  --gray-700: #4E4769;
+  --gray-600: #5F5876;
+  --gray-500: #7A7396;
+  --gray-400: #9C95B5;
+  --gray-300: #C5BFD5;
+  --gray-200: #E2DEEB;
+  --gray-100: #EFECF5;
+  --gray-50: #F8F6FB;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 16px; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--black);
+  background: var(--gray-50);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+  padding: 2rem 1.5rem;
+}
+
+.artifact {
+  max-width: 1400px;
+  margin: 0 auto;
+  background: var(--white);
+  border-radius: 18px;
+  padding: 2.5rem 3rem 2.25rem;
+  box-shadow: 0 20px 60px rgba(26,21,48,0.06), 0 4px 12px rgba(26,21,48,0.04);
+}
+
+/* ── Header ── */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--gray-100);
+  margin-bottom: 1.75rem;
+}
+.brand img {
+  height: 38px;
+  display: block;
+}
+.header-tag {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--purple);
+  padding: 0.4rem 0.85rem;
+  background: var(--purple-tint);
+  border-radius: 100px;
+}
+
+/* ── Hero ── */
+.hero {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.hero h1 {
+  font-size: clamp(1.9rem, 3.2vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  color: var(--black);
+  margin-bottom: 0.75rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.hero h1 em {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--purple);
+}
+.hero p {
+  font-size: 1rem;
+  color: var(--gray-600);
+  line-height: 1.55;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.hero p strong { color: var(--gray-800); font-weight: 600; }
+
+/* ── Pipeline ── */
+.pipeline {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.55rem;
+  margin-bottom: 2rem;
+}
+.stage {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 14px;
+  padding: 1.15rem 1.1rem 1.1rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.stage:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(79,61,190,0.10);
+  border-color: var(--purple-light);
+}
+.stage::after {
+  content: '';
+  position: absolute;
+  right: -0.55rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-left: 8px solid var(--purple-light);
+  z-index: 2;
+}
+.stage:last-child::after { display: none; }
+
+.stage-num {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 1.1rem;
+  color: var(--purple);
+  letter-spacing: 0.06em;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.stage-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--purple-deep);
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+  margin-bottom: 0.4rem;
+}
+.stage-when {
+  font-size: 0.72rem;
+  color: var(--gray-500);
+  line-height: 1.45;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px dashed var(--gray-200);
+  font-weight: 500;
+}
+.stage-section { margin-bottom: 0.7rem; }
+.stage-section:last-child { margin-bottom: 0; }
+.stage-section-label {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--purple);
+  margin-bottom: 0.3rem;
+}
+.stage-outcome {
+  font-size: 0.78rem;
+  color: var(--gray-800);
+  line-height: 1.45;
+  font-weight: 500;
+}
+.stage-feature {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--purple);
+  background: var(--purple-tint);
+  border: 1px solid rgba(79,61,190,0.14);
+  border-radius: 100px;
+  padding: 0.2rem 0.6rem;
+  margin: 0.2rem 0.2rem 0 0;
+  line-height: 1.3;
+}
+
+/* Feature row at top — flips a stage's accent color when needed */
+.stage:nth-child(1) .stage-name { color: var(--purple-deepest); }
+.stage:nth-child(5) { background: linear-gradient(180deg, var(--purple-tint) 0%, var(--white) 60%); }
+
+/* ── Closing ── */
+.closing {
+  position: relative;
+  text-align: center;
+  padding: 1.4rem 1.5rem;
+  background: linear-gradient(135deg, var(--purple-deepest) 0%, var(--purple-deep) 55%, var(--purple) 100%);
+  color: var(--white);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.closing::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 20% 50%, rgba(181,168,245,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 80% 50%, rgba(110,93,231,0.20) 0%, transparent 60%);
+  pointer-events: none;
+}
+.closing-inner { position: relative; z-index: 2; }
+.closing h2 {
+  font-size: clamp(1.05rem, 1.9vw, 1.4rem);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.015em;
+  color: var(--white);
+  max-width: 950px;
+  margin: 0 auto;
+}
+.closing h2 em {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--purple-light);
+}
+.closing-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+}
+.closing-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--purple-light);
+  opacity: 0.5;
+}
+.closing-dot:nth-child(3) { opacity: 1; box-shadow: 0 0 8px var(--purple-light); }
+
+/* ── Footer meta ── */
+.foot {
+  margin-top: 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.7rem;
+  color: var(--gray-500);
+  letter-spacing: 0.04em;
+}
+.foot strong { color: var(--gray-800); font-weight: 600; }
+
+/* ── Responsive ── */
+@media (max-width: 1100px) {
+  .pipeline { grid-template-columns: repeat(2, 1fr); }
+  .stage::after { display: none; }
+}
+@media (max-width: 600px) {
+  body { padding: 1rem; }
+  .artifact { padding: 1.5rem 1.25rem; }
+  .pipeline { grid-template-columns: 1fr; }
+  .header { flex-direction: column; gap: 0.85rem; }
+}
+
+/* ── Print (one-page landscape PDF) ── */
+@media print {
+  @page { size: 11in 8.5in landscape; margin: 0.4in; }
+  body { background: var(--white); padding: 0; }
+  .artifact {
+    box-shadow: none;
+    padding: 0;
+    max-width: none;
+    border-radius: 0;
+  }
+  .stage:hover { transform: none; box-shadow: none; border-color: var(--gray-200); }
+}
+</style>
+</head>
+<body>
+
+<div class="artifact">
+  <header class="header">
+    <a class="brand" href="https://brighthire.com" target="_blank" rel="noopener">
+      <img src="brighthire%20logo.png" alt="BrightHire">
+    </a>
+    <span class="header-tag">Meet the Platform</span>
+  </header>
+
+  <section class="hero">
+    <h1>BrightHire: the <em>system of record</em> for hiring decisions.</h1>
+    <p>The <strong>end-to-end interview intelligence platform</strong> — turning every conversation into structured, fair evidence. Five stages. One connected workflow. Every decision defensible.</p>
+  </section>
+
+  <section class="pipeline">
+
+    <article class="stage">
+      <div class="stage-num">01</div>
+      <div class="stage-name">Plan</div>
+      <div class="stage-when">Before the interview — build the plan, define the competencies, align the panel.</div>
+      <div class="stage-section">
+        <div class="stage-section-label">Outcome</div>
+        <div class="stage-outcome">Every interviewer walks in prepared with the same rubric.</div>
+      </div>
+      <div class="stage-section">
+        <div class="stage-section-label">Powered by</div>
+        <span class="stage-feature">Interview Guides</span>
+      </div>
+    </article>
+
+    <article class="stage">
+      <div class="stage-num">02</div>
+      <div class="stage-name">Screen</div>
+      <div class="stage-when">Initial candidate screening — at the scale the top of the funnel actually demands.</div>
+      <div class="stage-section">
+        <div class="stage-section-label">Outcome</div>
+        <div class="stage-outcome">More qualified candidates surfaced, faster — and the experience stays human.</div>
+      </div>
+      <div class="stage-section">
+        <div class="stage-section-label">Powered by</div>
+        <span class="stage-feature">BrightHire Screen (AI Interviewer)</span>
+        <span class="stage-feature">Practice Round</span>
+      </div>
+    </article>
+
+    <article class="stage">
+      <div class="stage-num">03</div>
+      <div class="stage-name">Interview</div>
+      <div class="stage-when">In the live conversation — captured and structured, not just recorded.</div>
+      <div class="stage-section">
+        <div class="stage-section-label">Outcome</div>
+        <div class="stage-outcome">Interviewers are fully present. Notes write themselves — structured to the rubric.</div>
+      </div>
+      <div class="stage-section">
+        <div class="stage-section-label">Powered by</div>
+        <span class="stage-feature">Custom AI Notes</span>
+        <span class="stage-feature">Interviews · Intake · Debriefs</span>
+      </div>
+    </article>
+
+    <article class="stage">
+      <div class="stage-num">04</div>
+      <div class="stage-name">Decide</div>
+      <div class="stage-when">Linking the evidence to the decision — so every hire is one you can defend.</div>
+      <div class="stage-section">
+        <div class="stage-section-label">Outcome</div>
+        <div class="stage-outcome">Scorecards grounded in what was actually said. Decisions traceable to evidence.</div>
+      </div>
+      <div class="stage-section">
+        <div class="stage-section-label">Powered by</div>
+        <span class="stage-feature">Scorecards</span>
+        <span class="stage-feature">Recruiter Insights</span>
+      </div>
+    </article>
+
+    <article class="stage">
+      <div class="stage-num">05</div>
+      <div class="stage-name">Improve</div>
+      <div class="stage-when">After the interview — every one teaches the next.</div>
+      <div class="stage-section">
+        <div class="stage-section-label">Outcome</div>
+        <div class="stage-outcome">Interviewers get sharper. Loops get tighter. Quality compounds across the team.</div>
+      </div>
+      <div class="stage-section">
+        <div class="stage-section-label">Powered by</div>
+        <span class="stage-feature">Interview Insights</span>
+        <span class="stage-feature">Coaching Tips Agent</span>
+      </div>
+    </article>
+
+  </section>
+
+  <section class="closing">
+    <div class="closing-inner">
+      <h2>Every conversation captured. Every decision <em>defensible</em>. Every interview gets better than the last.</h2>
+      <div class="closing-dots">
+        <span class="closing-dot"></span>
+        <span class="closing-dot"></span>
+        <span class="closing-dot"></span>
+        <span class="closing-dot"></span>
+        <span class="closing-dot"></span>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>It's not just summaries — it's the <strong>full record</strong>.</span>
+    <span>BrightHire · the system of record for hiring decisions</span>
+  </footer>
+</div>
+
+</body>
+</html>
